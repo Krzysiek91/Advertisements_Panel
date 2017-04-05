@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Advertisements list</h1><br><br>
+
+    <table>
+        <thead>
+            <tr style="border: 1px solid black">
+                <th>Id&nbsp&nbsp</th>
+                <th>Title&nbsp&nbsp</th>
+                <th>Description&nbsp&nbsp</th>
+                <th>Photo</th>
+                <th>Expirationdate&nbsp&nbsp</th>
+                <th>User&nbsp&nbsp</th>
+                <th>Actions&nbsp&nbsp</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for advertisement in advertisements %}
+            <tr>
+                <td><a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">{{ advertisement.id }}</a></td>
+                <td>{{ advertisement.title }}</td>
+                <td>{{ advertisement.description }}</td>
+                <td>{{ advertisement.photo }}</td>
+                <td>{% if advertisement.expirationDate %}{{ advertisement.expirationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ advertisement.user }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('advertisement_show', { 'id': advertisement.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('comment_new') }}">comment</a><br><br>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li><br><br>
+            <a href="{{ path('advertisement_new') }}" class="shadow">Create a new advertisement</a><br><br>
+        </li>
+        <li>
+            <a href="{{ path('category_new') }}" class="shadow">Create new category</a><br><br>
+        </li>
+    </ul>
+{% endblock %}

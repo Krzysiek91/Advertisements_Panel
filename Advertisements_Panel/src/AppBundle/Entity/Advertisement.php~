@@ -1,0 +1,213 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Advertisement
+ *
+ * @ORM\Table(name="advertisement")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AdvertisementRepository")
+ */
+class Advertisement
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
+    private $photo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expirationDate", type="datetime")
+     */
+    private $expirationDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=255)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Category", inversedBy="advertisement")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Advertisement
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Advertisement
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     * @return Advertisement
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set expirationDate
+     *
+     * @param \DateTime $expirationDate
+     * @return Advertisement
+     */
+    public function setExpirationDate($expirationDate)
+    {
+        $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get expirationDate
+     *
+     * @return \DateTime 
+     */
+    public function getExpirationDate()
+    {
+        return $this->expirationDate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return Advertisement
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+
+
+
+
+
+}
