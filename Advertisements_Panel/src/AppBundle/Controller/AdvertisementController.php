@@ -2,7 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Advertisement;
+use AppBundle\Entity\Comment;
+use AppBundle\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -67,9 +70,14 @@ class AdvertisementController extends Controller
     {
         $deleteForm = $this->createDeleteForm($advertisement);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $comments = $advertisement->getComments();
+
         return $this->render('advertisement/show.html.twig', array(
             'advertisement' => $advertisement,
             'delete_form' => $deleteForm->createView(),
+            'comments' => $comments,
         ));
     }
 

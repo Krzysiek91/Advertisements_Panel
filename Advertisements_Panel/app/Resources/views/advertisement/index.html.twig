@@ -33,21 +33,27 @@
                             <a href="{{ path('advertisement_edit', { 'id': advertisement.id }) }}">edit</a>
                         </li>
                         <li>
-                            <a href="{{ path('comment_new') }}">comment</a><br><br>
+                            <a href="{{ path('comment_new', {'advertisement_id': advertisement.id}) }}">comment</a><br><br>
                         </li>
                     </ul>
                 </td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
 
+
     <ul>
+        {% if is_granted('ROLE_USER') %}
         <li><br><br>
             <a href="{{ path('advertisement_new') }}" class="shadow">Create a new advertisement</a><br><br>
         </li>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
         <li>
             <a href="{{ path('category_new') }}" class="shadow">Create new category</a><br><br>
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

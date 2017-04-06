@@ -28,6 +28,12 @@ class Comment
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="advertisement", inversedBy="comments")
+     * @ORM\JoinColumn(name="advertisement_id", referencedColumnName="id")
+     */
+    private $advertisement;
+
 
     /**
      * Get id

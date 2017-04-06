@@ -65,6 +65,12 @@ class Advertisement
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="advertisement")
+     */
+    private $comments;
+
+
+    /**
      * Get id
      *
      * @return integer 

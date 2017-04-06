@@ -28,6 +28,12 @@ class Comment
      */
     private $comment;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Advertisement", inversedBy="comments")
+     * @ORM\JoinColumn(name="advertisement_id", referencedColumnName="id")
+     */
+    private $advertisement;
+
 
     /**
      * Get id
@@ -60,5 +66,28 @@ class Comment
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * Set advertisement
+     *
+     * @param \AppBundle\Entity\advertisement $advertisement
+     * @return Comment
+     */
+    public function setAdvertisement(\AppBundle\Entity\advertisement $advertisement = null)
+    {
+        $this->advertisement = $advertisement;
+
+        return $this;
+    }
+
+    /**
+     * Get advertisement
+     *
+     * @return \AppBundle\Entity\advertisement 
+     */
+    public function getAdvertisement()
+    {
+        return $this->advertisement;
     }
 }

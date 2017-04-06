@@ -29,6 +29,7 @@
                 <th>User</th>
                 <td>{{ advertisement.user }}</td>
             </tr>
+
         </tbody>
     </table>
 
@@ -45,4 +46,11 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
+    {% for comment in comments %}
+
+        <p>{{ comment.comment }}</p>
+
+    {% endfor %}
+
 {% endblock %}

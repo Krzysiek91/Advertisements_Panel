@@ -34,16 +34,28 @@ class CommentController extends Controller
     /**
      * Creates a new comment entity.
      *
-     * @Route("/new", name="comment_new")
+     * @Route("/new/{advertisement_id}", name="comment_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $advertisement_id)
     {
+        $advertisement = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Advertisement')
+            ->find($advertisement_id);
+
+        if (!$advertisement) {
+            throw $this->createNotFoundException();
+        }
+
         $comment = new Comment();
         $form = $this->createForm('AppBundle\Form\CommentType', $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAdvertisement($advertisement);
+            $advertisement->addComment($comment);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
